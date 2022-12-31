@@ -2,7 +2,6 @@ import collections
 
 
 def load_state(net, checkpoint):
-    # source_state = checkpoint
     source_state = checkpoint['state_dict']
     target_state = net.state_dict()
     new_target_state = collections.OrderedDict()
@@ -17,7 +16,6 @@ def load_state(net, checkpoint):
 
 
 def load_from_mobilenet(net, checkpoint):
-    # source_state = checkpoint
     source_state = checkpoint['state_dict']
     target_state = net.state_dict()
     new_target_state = collections.OrderedDict()
