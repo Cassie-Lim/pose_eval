@@ -1,0 +1,23 @@
+from queue import Queue
+import random, threading, time
+
+detectMotion = [0,1,2,3]
+# the detect task send the list to the game thread
+class myDetect(threading.Thread):
+    def __init__(self, name, queue):
+        threading.Thread.__init__(self, name=name)
+        self.mailbox = queue
+    def run(self):
+        # for i in range(5):
+        while(1):
+            # detectMotion[0] = detectMotion[0] + 1
+            # detectMotion[1] = detectMotion[1] + 1
+            # detectMotion[2] = detectMotion[2] + 1
+            # detectMotion[3] = detectMotion[3] + 1
+            detectMotion[0] = random.random()
+            detectMotion[1] = random.random()
+            detectMotion[2] = random.random()
+            detectMotion[3] = random.random()
+            self.mailbox.put(detectMotion)
+            time.sleep(0.01)
+        print("detection task exited")
