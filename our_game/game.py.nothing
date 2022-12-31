@@ -1,0 +1,20 @@
+from queue import Queue
+import threading
+from pacman.pacman_main import pacmain
+
+userMotion=[0.1, 1.2, 2.3, 3.4]
+
+# game gets data from detect task
+class myGame(threading.Thread):
+    def __init__(self, name, queue):
+        threading.Thread.__init__(self, name=name)
+        self.mailbox = queue
+    def run(self):  
+        while(1):
+            try:
+                userMotion = self.mailbox.get(timeout = 5)
+            except:
+                print("no more data, exit")
+                break
+            print("%s get up:%f down:%f left:%f right:%f" % (self.getName(), userMotion[0], userMotion[1], userMotion[2], userMotion[3]))
+
