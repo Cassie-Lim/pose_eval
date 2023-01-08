@@ -1,6 +1,13 @@
 from torch import nn
 
 
+# 把每个参数读出来
+def get_parameters_effi(model):
+    for m in model.modules():
+        for param_name, param in m.named_parameters():
+            yield param
+
+
 def get_parameters(model, predicate):
     for module in model.modules():
         for param_name, param in module.named_parameters():
