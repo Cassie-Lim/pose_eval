@@ -1,0 +1,6 @@
+coco/
+.idea
+*.pyc
+__pycache
+prepared_train_annotation.pkl
+val_subset.json
