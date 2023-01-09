@@ -9,7 +9,7 @@ from pycocotools.cocoeval import COCOeval
 import torch
 
 from datasets.coco import CocoValDataset
-from models.with_mobilenet import PoseEstimationWithMobileNet
+from models.with_effi import PoseEstimationWithEffi
 from modules.keypoints import extract_keypoints, group_keypoints
 from modules.load_state import load_state
 
@@ -173,7 +173,7 @@ if __name__ == '__main__':
     parser.add_argument('--visualize', action='store_true', help='show keypoints')
     args = parser.parse_args()
 
-    net = PoseEstimationWithMobileNet()
+    net = PoseEstimationWithEffi()
     checkpoint = torch.load(args.checkpoint_path)
     load_state(net, checkpoint)
 

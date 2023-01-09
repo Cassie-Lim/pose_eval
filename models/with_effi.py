@@ -89,10 +89,12 @@ class PoseEstimationWithEffi(nn.Module):
     def __init__(self, num_refinement_stages=1, num_channels=128, num_heatmaps=19, num_pafs=38):
         super().__init__()
         # self.model = edgeformer()
-        self.model = EfficientNet.from_pretrained('efficientnet-b0', advprop=True, num_classes=512)
-        # self.conv1x1 = nn.Sequential(
-        #     nn.Conv2d(1280,512,kernel_size=1,stride=1,bias=False)
-        # )
+        # self.model = EfficientNet.from_pretrained('efficientnet-b0', num_classes=512, weights_path='models/adv-efficientnet-b0.pth')
+        self.model = EfficientNet.from_name('efficientnet-b0', include_top=False)
+        # self.model._fc = nn.Sequential()
+        self.conv1x1 = nn.Sequential(
+            nn.Conv2d(1280, 512, kernel_size=1, stride=1, bias=False)
+        )
         self.cpm = Cpm(512, num_channels)
 
         self.initial_stage = InitialStage(num_channels, num_heatmaps, num_pafs)
@@ -103,6 +105,7 @@ class PoseEstimationWithEffi(nn.Module):
 
     def forward(self, x):
         backbone_features = self.model(x)
+        backbone_features = self.conv1x1(backbone_features)
         backbone_features = self.cpm(backbone_features)
 
         stages_output = self.initial_stage(backbone_features)
