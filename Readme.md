@@ -1,4 +1,4 @@
-> Pandoc 转的，凑活看吧:clown_face:（仓库里有pdf和tex源码）
+> Pandoc 转的，凑合看吧:clown_face:（仓库里有pdf和tex源码）
 
 # 基于头颈角度检测的计算机视觉交互式颈椎病预防系统
 
